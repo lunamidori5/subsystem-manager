@@ -26,7 +26,7 @@ def update_repo():
 
         if local_commit == remote_commit:
             print("Repository is already up-to-date.")
-            return True
+            return False
         else:
             print("Repository is not up-to-date.")
             print("Pulling changes...")
