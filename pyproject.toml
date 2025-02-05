@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "gitpython>=3.1.44",
     "halo>=0.0.31",
     "nicegui>=2.5.0",
 ]
