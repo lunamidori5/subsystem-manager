@@ -15,6 +15,10 @@ async def localai_install(ui, manager, docker_run_command):
     port_to_use = manager.port + local_port_offset
     full_image_name_command = f"--name {manager.image}"
 
+    mount_folders = "-v /var/lib/docker/volumes/midoriai_midori-ai-models/_data:/build/models"
+
+    docker_command = f"{manager.command_base} {docker_run_command} -d {mount_folders} -p {port_to_use}:8080"
+
     print(manager.type)
 
     command_pre_list = []
@@ -31,9 +35,9 @@ async def localai_install(ui, manager, docker_run_command):
     
     if "Install".lower() in manager.type.lower():
         if manager.use_gpu:
-            command_pre_list.append(f"{manager.command_base} {docker_run_command} -d --gpus all -p {port_to_use}:8080 {full_image_name_command} -ti localai/localai:latest-aio-gpu-nvidia-cuda-11")
+            command_pre_list.append(f"{docker_command} --gpus all {full_image_name_command} -ti localai/localai:latest-aio-gpu-nvidia-cuda-11")
         else:
-            command_pre_list.append(f"{manager.command_base} {docker_run_command} -d -p {port_to_use}:8080 {full_image_name_command} -ti localai/localai:latest-aio-cpu")
+            command_pre_list.append(f"{docker_command} {full_image_name_command} -ti localai/localai:latest-aio-cpu")
         
     await run_commands_async(n, command_pre_list)
 
