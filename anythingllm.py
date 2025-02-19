@@ -21,6 +21,12 @@ async def anythingllm_install(ui, manager, docker_run_command):
     if "Purge".lower() in manager.type.lower():
         command_pre_list.append(f"{manager.command_base} stop {manager.image}")
         command_pre_list.append(f"{manager.command_base} rm {manager.image}")
+
+    if "Start".lower() in manager.type.lower():
+        command_pre_list.append(f"{manager.command_base} start {manager.image}")
+
+    if "Shutdown".lower() in manager.type.lower():
+        command_pre_list.append(f"{manager.command_base} stop {manager.image}")
         
     if "Install".lower() in manager.type.lower():
         command_pre_list.append(f"{manager.command_base} {docker_run_command} -d -p {port_to_use}:3001 {full_image_name_command} --cap-add SYS_ADMIN -v anythingllm:/app/server/storage -e STORAGE_DIR=\"/app/server/storage\" mintplexlabs/anythingllm")

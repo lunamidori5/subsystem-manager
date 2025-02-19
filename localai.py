@@ -20,7 +20,14 @@ async def localai_install(ui, manager, docker_run_command):
     command_pre_list = []
 
     if "Purge".lower() in manager.type.lower():
-        command_pre_list.append(f"{manager.command_base} stop {manager.image} && {manager.command_base} rm {manager.image}")
+        command_pre_list.append(f"{manager.command_base} stop {manager.image}")
+        command_pre_list.append(f"{manager.command_base} rm {manager.image}")
+
+    if "Start".lower() in manager.type.lower():
+        command_pre_list.append(f"{manager.command_base} start {manager.image}")
+
+    if "Shutdown".lower() in manager.type.lower():
+        command_pre_list.append(f"{manager.command_base} stop {manager.image}")
     
     if "Install".lower() in manager.type.lower():
         if manager.use_gpu:

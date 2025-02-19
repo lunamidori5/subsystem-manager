@@ -83,6 +83,10 @@ def handle_toggle_change(toggle):
         manager.type = 'Install'
     elif value == 'Purge':
         manager.type = 'Purge'
+    elif value == 'Start':
+        manager.type = 'Start'
+    elif value == 'Shutdown':
+        manager.type = 'Shutdown'
     else:
         print(f"Unknown Var: {str(value)}")
         manager.type = 'Install'
@@ -112,7 +116,7 @@ ui.label("To install a backend please click Install Below")
 
 with ui.row():
     ui.label("Manager Mode:")
-    toggle = ui.toggle(['Install', 'Update', 'Purge'], value='Install')
+    toggle = ui.toggle(['Start', 'Install', 'Update', 'Shutdown', 'Purge'], value='Install')
     toggle_gpu = ui.toggle(['Use GPU', 'No GPU'], value='No GPU')
     toggle.on_value_change(handle_toggle_change) 
     toggle_gpu.on_value_change(handle_gput_toggle_change) 
