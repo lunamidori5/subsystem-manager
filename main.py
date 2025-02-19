@@ -13,12 +13,12 @@ from update_repo import update_repo
 
 ### To add your own backends just import them here and format them like the others
 
-from bigagi import bigagi_install
-from bigagi import bigagi_two_install
+from bigagi import bigagi
+from bigagi import bigagi_two
 
-from localai import localai_install
+from localai import localai
 
-from anythingllm import anythingllm_install
+from anythingllm import anythingllm
 
 ### End of backends imports
 
@@ -134,16 +134,16 @@ with ui.row():
             ui.input(label='Port Number', placeholder='Edit to change port', on_change=lambda e: manager.change_port(e.value))
             with ui.column():
                 ui.label("LocalAI:")
-                ui.button("LocalAI", on_click=lambda: localai_install(ui, manager, docker_run_command))
+                ui.button("LocalAI", on_click=lambda: localai(ui, manager, docker_run_command))
 
             with ui.column():
                 ui.label("AnythingLLM:")
-                ui.button("AnythingLLM", on_click=lambda: anythingllm_install(ui, manager, docker_run_command))
+                ui.button("AnythingLLM", on_click=lambda: anythingllm(ui, manager, docker_run_command))
 
             with ui.column():
                 ui.label("Big AGI:")
-                ui.button("Big-AGI V1 (Stable)", on_click=lambda: bigagi_install(ui, manager, docker_run_command))
-                ui.button("Big-AGI V2 (Beta - MUST REINSTALL EACH REBOOT)", on_click=lambda: bigagi_two_install(ui, manager, docker_run_command, docker_sock_command))
+                ui.button("Big-AGI V1 (Stable)", on_click=lambda: bigagi(ui, manager, docker_run_command))
+                ui.button("Big-AGI V2 (Beta - MUST REINSTALL EACH REBOOT)", on_click=lambda: bigagi_two(ui, manager, docker_run_command, docker_sock_command))
 
             with ui.column():
                 ui.label("Mozilla AI (Blueprints):")

@@ -2,7 +2,7 @@ import os
 
 from runcommand import run_commands_async
 
-async def bigagi_install(ui, manager, docker_run_command):
+async def bigagi(ui, manager, docker_run_command):
     n = ui.notification(timeout=None)
     n.message = f'Starting... Please wait...'
     manager.change_image("midori-ai-big-agi")
@@ -36,7 +36,7 @@ async def bigagi_install(ui, manager, docker_run_command):
 
     manager.reset_image()
 
-async def bigagi_two_install(ui, manager, docker_run_command, docker_sock_command):
+async def bigagi_two(ui, manager, docker_run_command, docker_sock_command):
     n = ui.notification(timeout=None)
     n.message = f'Starting... Please wait...'
     runsh_path = os.path.join(".", "run.sh")

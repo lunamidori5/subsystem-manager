@@ -1,6 +1,6 @@
 from runcommand import run_commands_async
 
-async def anythingllm_install(ui, manager, docker_run_command):
+async def anythingllm(ui, manager, docker_run_command):
     n = ui.notification(timeout=None)
     n.message = f'Starting... Please wait...'
     manager.change_image("midori-ai-anythingllm")

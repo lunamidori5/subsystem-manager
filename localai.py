@@ -1,7 +1,7 @@
 
 from runcommand import run_commands_async
 
-async def localai_install(ui, manager, docker_run_command):
+async def localai(ui, manager, docker_run_command):
     n = ui.notification(timeout=None)
     n.message = f'Starting... Please wait...'
     manager.change_image("midori-ai-local-ai")
