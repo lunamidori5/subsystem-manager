@@ -19,6 +19,7 @@ from bigagi import bigagi
 from bigagi import bigagi_two
 
 from localai import localai
+from ollama import ollama
 
 from anythingllm import anythingllm
 
