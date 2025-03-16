@@ -15,6 +15,8 @@ async def invokeai(ui, manager, docker_run_command):
     port_to_use = manager.port + local_port_offset
     full_image_name_command = f"--name {manager.image}"
 
+    containerd_name = "ghcr.io/invoke-ai/invokeai"
+
     mount_folders = "-v /var/lib/docker/volumes/midoriai_midori-ai-invokeai/_data:/invokeai"
 
     docker_command = f"{manager.command_base} {docker_run_command} -d {mount_folders} -p {port_to_use}:9090"
@@ -35,9 +37,12 @@ async def invokeai(ui, manager, docker_run_command):
     
     if "Install".lower() in manager.type.lower():
         if manager.use_gpu:
-            command_pre_list.append(f"{docker_command} --gpus all {full_image_name_command} -ti ghcr.io/invoke-ai/invokeai")
+            if manager.gpu_type == "nvidia":
+                command_pre_list.append(f"{docker_command} --runtime=nvidia --gpus all {full_image_name_command} -ti {containerd_name}")
+            elif manager.gpu_type == "amd":
+                command_pre_list.append(f"{docker_command} --device /dev/kfd --device /dev/dri {full_image_name_command} -ti {containerd_name}:main-rocm")
         else:
-            command_pre_list.append(f"{docker_command} {full_image_name_command} -ti ghcr.io/invoke-ai/invokeai")
+            command_pre_list.append(f"{docker_command} {full_image_name_command} -ti {containerd_name}")
         
     await run_commands_async(n, command_pre_list)
 
