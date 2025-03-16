@@ -119,6 +119,8 @@ with ui.column():
     markdown_box = ui.code(str(get_docker_json()))
     ui.update(markdown_box)
 
+ui.separator()
+
 with ui.column():
     with ui.row():
 
