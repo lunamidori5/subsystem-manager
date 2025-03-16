@@ -10,8 +10,10 @@ from config import image_name
 from config import image_download
 
 from config import docker_command
+
 from config import docker_run_command
 from config import docker_run_rm_command
+
 from config import docker_sock_command
 
 from manager import Manager_mode
@@ -25,6 +27,8 @@ from bigagi import bigagi_two
 
 from ollama import ollama
 from localai import localai
+
+from invokeai import invokeai
 
 from anythingllm import anythingllm
 
@@ -138,6 +142,13 @@ with ui.row():
         with ui.column():
             ui.button("Big-AGI V1 (Stable)", on_click=lambda: bigagi(ui, manager, docker_run_command))
             ui.button("Big-AGI V2 (Beta)", on_click=lambda: bigagi_two(ui, manager, docker_run_rm_command, docker_sock_command))
+
+    with ui.row():
+
+        ui.label("Photo Making:")
+
+        with ui.column():
+            ui.button("InvokeAI", on_click=lambda: invokeai(ui, manager, docker_run_command))
 
     with ui.row():
         ui.label("Mozilla AI (Blueprints):")
