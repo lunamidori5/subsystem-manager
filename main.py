@@ -109,7 +109,7 @@ with ui.row():
             ui.label("Settings:")
             ui.input(label='Port Number', placeholder='Edit to change port', on_change=lambda e: manager.change_port(e.value))
 
-        with ui.column():
+        with ui.row():
 
             ui.label("LRM / LLM Backends:")
 
@@ -121,7 +121,7 @@ with ui.row():
                 ui.label("Ollama:")
                 ui.button("Ollama", on_click=lambda: ollama(ui, manager, docker_run_command))
 
-        with ui.column():
+        with ui.row():
 
             ui.label("Chat WebUi:")
 
@@ -134,7 +134,7 @@ with ui.row():
                 ui.button("Big-AGI V1 (Stable)", on_click=lambda: bigagi(ui, manager, docker_run_command))
                 ui.button("Big-AGI V2 (Beta)", on_click=lambda: bigagi_two(ui, manager, docker_run_rm_command, docker_sock_command))
 
-        with ui.column():
+        with ui.row():
             ui.label("Mozilla AI (Blueprints):")
 
         #ui.button("3 - Update Backends in Subsystem", on_click=on_button_click)
