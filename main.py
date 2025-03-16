@@ -23,8 +23,8 @@ from update_repo import update_repo
 from bigagi import bigagi
 from bigagi import bigagi_two
 
-from localai import localai
 from ollama import ollama
+from localai import localai
 
 from anythingllm import anythingllm
 
