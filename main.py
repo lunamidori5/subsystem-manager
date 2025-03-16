@@ -105,7 +105,7 @@ with ui.splitter(reverse=True) as splitter:
 
         with ui.row():
             ui.label("Manager Mode:")
-            toggle = ui.toggle(['Start', 'Install', 'Update', 'Shutdown', 'Purge'], value='Install')
+            toggle = ui.toggle(['Start', 'Install', 'Update', 'Shutdown', 'Uninstall'], value='Install')
             toggle.on_value_change(handle_toggle_change) 
 
         with ui.row():
