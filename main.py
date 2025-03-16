@@ -117,6 +117,8 @@ with ui.row():
                 ui.label("Ollama:")
                 ui.button("Ollama", on_click=lambda: ollama(ui, manager, docker_run_command))
 
+        with ui.row():
+
             ui.label("Chat WebUi:")
 
             with ui.column():
