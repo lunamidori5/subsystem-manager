@@ -130,13 +130,14 @@ with ui.row():
 
     ui.label("LRM / LLM Backends:")
 
-    with ui.row():
+    with ui.column():
+        with ui.row():
 
-        with ui.column():
-            ui.button("LocalAI", on_click=lambda: localai(ui, manager, docker_run_command))
+            with ui.column():
+                ui.button("LocalAI", on_click=lambda: localai(ui, manager, docker_run_command))
 
-        with ui.column():
-            ui.button("Ollama", on_click=lambda: ollama(ui, manager, docker_run_command))
+            with ui.column():
+                ui.button("Ollama", on_click=lambda: ollama(ui, manager, docker_run_command))
 
 ui.separator()
 
