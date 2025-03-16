@@ -75,6 +75,16 @@ def handle_gput_toggle_change(toggle):
         print(f"Unknown Var: {str(value)}")
         manager.use_gpu = False
 
+def handle_gpu_type_toggle_change(toggle):
+    value = str(toggle.value)
+    if value.lower() == 'nvidia':
+        manager.gpu_type = "nvidia"
+    elif value.lower() == 'amd':
+        manager.gpu_type = "amd"
+    else:
+        print(f"Unknown Var: {str(value)}")
+        manager.gpu_type = "unknown"
+
 ui.separator()
 
 dark = ui.dark_mode(True)
@@ -92,8 +102,10 @@ with ui.row():
     ui.label("Manager Mode:")
     toggle = ui.toggle(['Start', 'Install', 'Update', 'Shutdown', 'Purge'], value='Install')
     toggle_gpu = ui.toggle(['Use GPU', 'No GPU'], value='No GPU')
+    toggle_gpu_type = ui.toggle(['Nvidia', 'AMD'], value='Nvidia')
     toggle.on_value_change(handle_toggle_change) 
     toggle_gpu.on_value_change(handle_gput_toggle_change) 
+    toggle_gpu_type.on_value_change(handle_gpu_type_toggle_change) 
 
 ui.separator()
 
