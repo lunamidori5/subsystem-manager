@@ -11,6 +11,7 @@ class Manager_mode:
         self.dockerbuilder = f"{self.dockerexec}" 
         self.port = 30000
         self.use_gpu = False
+        self.gpu_type = "nvidia"
     
     def check_type(self, command_in):
         if self.type == "Update Install Purge":
