@@ -113,7 +113,7 @@ with ui.row():
 
 ui.separator()
 
-with ui.column():
+with ui.row():
     ui.label("Installed Backends:")
 
     markdown_box = ui.code(str(get_docker_json()))
