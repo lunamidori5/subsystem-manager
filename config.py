@@ -20,6 +20,7 @@ docker_command = config['docker']['command']
 docker_sock_command = f"-v {docker_socket}:/var/run/docker.sock"
 
 docker_run_command = "run --restart always"
+docker_run_rm_command = "run --rm"
 
 if not os.path.exists(docker_socket):
     print("Docker socket not found at:", docker_socket)

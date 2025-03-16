@@ -6,8 +6,13 @@ import sys
 
 from nicegui import ui, app, native
 
-from config import image_name, image_download
-from config import docker_command, docker_run_command, docker_sock_command
+from config import image_name
+from config import image_download
+
+from config import docker_command
+from config import docker_run_command
+from config import docker_run_rm_command
+from config import docker_sock_command
 
 from manager import Manager_mode
 
@@ -101,9 +106,18 @@ with ui.row():
 
         with ui.row():
             ui.input(label='Port Number', placeholder='Edit to change port', on_change=lambda e: manager.change_port(e.value))
+
+            ui.label("LRM / LLM Backends:")
+
             with ui.column():
                 ui.label("LocalAI:")
                 ui.button("LocalAI", on_click=lambda: localai(ui, manager, docker_run_command))
+
+            with ui.column():
+                ui.label("Ollama:")
+                ui.button("Ollama", on_click=lambda: ollama(ui, manager, docker_run_command))
+
+            ui.label("Chat WebUi:")
 
             with ui.column():
                 ui.label("AnythingLLM:")
@@ -112,7 +126,7 @@ with ui.row():
             with ui.column():
                 ui.label("Big AGI:")
                 ui.button("Big-AGI V1 (Stable)", on_click=lambda: bigagi(ui, manager, docker_run_command))
-                ui.button("Big-AGI V2 (Beta - MUST REINSTALL EACH REBOOT)", on_click=lambda: bigagi_two(ui, manager, docker_run_command, docker_sock_command))
+                ui.button("Big-AGI V2 (Beta)", on_click=lambda: bigagi_two(ui, manager, docker_run_rm_command, docker_sock_command))
 
             with ui.column():
                 ui.label("Mozilla AI (Blueprints):")
