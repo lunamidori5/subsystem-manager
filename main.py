@@ -100,28 +100,29 @@ with ui.row():
 
 ui.separator()
 
-ui.label("To install a backend please click Install Below")
+with ui.splitter(reverse=True) as splitter:
+    with splitter.before:
 
-with ui.row():
-    ui.label("Manager Mode:")
-    toggle = ui.toggle(['Start', 'Install', 'Update', 'Shutdown', 'Purge'], value='Install')
-    toggle_gpu = ui.toggle(['Use GPU', 'No GPU'], value='No GPU')
-    toggle_gpu_type = ui.toggle(['Nvidia', 'AMD'], value='Nvidia')
-    toggle.on_value_change(handle_toggle_change) 
-    toggle_gpu.on_value_change(handle_gput_toggle_change) 
-    toggle_gpu_type.on_value_change(handle_gpu_type_toggle_change) 
+        with ui.row():
+            ui.label("Manager Mode:")
+            toggle = ui.toggle(['Start', 'Install', 'Update', 'Shutdown', 'Purge'], value='Install')
+            toggle.on_value_change(handle_toggle_change) 
 
-ui.separator()
+        with ui.row():
+            ui.label("Support GPU:")
+            toggle_gpu = ui.toggle(['Use GPU', 'No GPU'], value='No GPU')
+            toggle_gpu.on_value_change(handle_gput_toggle_change) 
 
-with ui.row():
-    ui.label("Installed Backends:")
+        with ui.row():
+            ui.label("GPU Type:")
+            toggle_gpu_type = ui.toggle(['Nvidia', 'AMD'], value='Nvidia')
+            toggle_gpu_type.on_value_change(handle_gpu_type_toggle_change) 
 
-    markdown_box = ui.code(str(get_docker_json()))
-    ui.update(markdown_box)
+        with ui.row():
+            markdown_box = ui.code(str(get_docker_json()))
+            ui.update(markdown_box)
 
-    ui.separator()
-
-    with ui.column():
+    with splitter.after:
         with ui.row():
 
             ui.label("Settings:")
