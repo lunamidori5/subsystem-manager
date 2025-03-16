@@ -105,7 +105,11 @@ with ui.row():
             ui.label("Manage Backends:")
 
         with ui.row():
+
+            ui.label("Set Backend Port Number:")
             ui.input(label='Port Number', placeholder='Edit to change port', on_change=lambda e: manager.change_port(e.value))
+
+        with ui.row():
 
             ui.label("LRM / LLM Backends:")
 
