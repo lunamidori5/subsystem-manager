@@ -15,6 +15,7 @@ from config import docker_run_command
 from config import docker_run_rm_command
 
 from config import docker_sock_command
+from config import volumes, update_volume_config
 
 from manager import Manager_mode
 
@@ -127,6 +128,14 @@ with ui.splitter(reverse=True) as splitter:
 
             ui.label("Settings:")
             ui.input(label='Port Number', placeholder='Edit to change port', on_change=lambda e: manager.change_port(e.value))
+
+        with ui.row():
+            ui.label("Volume Mounts:")
+        with ui.column():
+            localai_box = ui.input(label='LocalAI', value=volumes['localai'])
+            ollama_box = ui.input(label='Ollama', value=volumes['ollama'])
+            invoke_box = ui.input(label='InvokeAI', value=volumes['invokeai'])
+            ui.button("Save Mounts", on_click=lambda: update_volume_config({'localai': localai_box.value, 'ollama': ollama_box.value, 'invokeai': invoke_box.value}))
 
         ui.separator()
 

@@ -14,6 +14,23 @@ spinner = Halo(text='Loading', spinner='dots', color='green')
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+if not config.has_section('volumes'):
+    config.add_section('volumes')
+
+DEFAULT_VOLUMES = {
+    'localai': '/var/lib/docker/volumes/midoriai_midori-ai-models/_data:/build/models',
+    'ollama': '/var/lib/docker/volumes/midoriai_midori-ai-ollama/_data:/root/.ollama',
+    'invokeai': '/var/lib/docker/volumes/midoriai_midori-ai-invokeai/_data:/invokeai',
+}
+
+def _load_volumes():
+    vols = {}
+    for key, default in DEFAULT_VOLUMES.items():
+        vols[key] = config['volumes'].get(key, default)
+    return vols
+
+volumes = _load_volumes()
+
 docker_socket = config['docker']['sock']
 docker_command = config['docker']['command']
 
@@ -43,3 +60,15 @@ else:
 
 if needs_sudo:
     docker_command = "sudo " + docker_command
+
+
+def update_volume_config(new_volumes: dict):
+    """Save updated volume mounts to config.ini."""
+    global volumes
+    volumes.update(new_volumes)
+    if not config.has_section('volumes'):
+        config.add_section('volumes')
+    for key, value in volumes.items():
+        config['volumes'][key] = value
+    with open('config.ini', 'w') as configfile:
+        config.write(configfile)

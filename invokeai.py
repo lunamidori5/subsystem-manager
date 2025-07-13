@@ -1,4 +1,5 @@
 
+from config import volumes
 from runcommand import run_commands_async
 
 async def invokeai(ui, manager, docker_run_command):
@@ -17,7 +18,7 @@ async def invokeai(ui, manager, docker_run_command):
 
     containerd_name = "ghcr.io/invoke-ai/invokeai"
 
-    mount_folders = "-v /var/lib/docker/volumes/midoriai_midori-ai-invokeai/_data:/invokeai"
+    mount_folders = f"-v {volumes['invokeai']}"
 
     docker_command = f"{manager.command_base} {docker_run_command} -d {mount_folders} -p {port_to_use}:9090"
 

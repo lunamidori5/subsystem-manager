@@ -1,4 +1,5 @@
 
+from config import volumes
 from runcommand import run_commands_async
 
 async def localai(ui, manager, docker_run_command):
@@ -15,7 +16,7 @@ async def localai(ui, manager, docker_run_command):
     port_to_use = manager.port + local_port_offset
     full_image_name_command = f"--name {manager.image}"
 
-    mount_folders = "-v /var/lib/docker/volumes/midoriai_midori-ai-models/_data:/build/models"
+    mount_folders = f"-v {volumes['localai']}"
 
     docker_command = f"{manager.command_base} {docker_run_command} -d {mount_folders} -p {port_to_use}:8080"
 
