@@ -2,7 +2,6 @@
 ## But I am hopeing that we can get this worked out, only remove these comments if we have done this and this is live
 
 import os
-import sys
 
 from nicegui import ui, app, native
 
@@ -18,8 +17,6 @@ from config import docker_sock_command
 from config import volumes, update_volume_config
 
 from manager import Manager_mode
-
-from update_repo import update_repo
 
 ### To add your own backends just import them here and format them like the others
 
@@ -37,8 +34,7 @@ from anythingllm import anythingllm
 
 temp_menu = False
 
-if update_repo():
-    sys.exit(0)
+# NOTE: This program is being sunset on 1/1/2026. Thank you for using it! - Midori AI and Luna
 
 def get_docker_json():
     temp_file = "docker_ps_output.md"
